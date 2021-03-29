@@ -1,5 +1,6 @@
 void setup() {
    size(1000,500,P3D); 
+   background(0,0,0);
    
    camera(
      0, 2500, 1000, 

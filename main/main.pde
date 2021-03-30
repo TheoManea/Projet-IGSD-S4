@@ -3,15 +3,15 @@ WorkSpace workspace;
 
 void setup() {
   // Display setup
-  size(1500,500,P3D);
+  fullScreen(P3D);
   // Setup Head Up Display
  
-  smooth(4);
+  smooth(8);
   frameRate(60);
   // Initial drawing
   background(0x40);
   // Prepare local coordinate system grid & gizmo
-  this.workspace = new WorkSpace();
+  this.workspace = new WorkSpace(250*100);
 
   camera(
      0, 2500, 1000, 

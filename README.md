@@ -1,4 +1,4 @@
-# Ce projet a pour objectif de vous faire réaliser une représentation en 3D du site de l’Université Paris Saclay.
+# Ce projet a pour objectif de réaliser une représentation en 3D du site de l’Université Paris Saclay.
 Projet d'informatique graphique pour la science des donneés de la L2 Informatique de Paris-Sud. (2020-2021)
 
 

@@ -40,16 +40,16 @@ void keyPressed() {
   if (key == CODED){
     switch(keyCode){
       case UP:
-        this.camera.adjustColatitude(-PI/100);
-        break;
-      case DOWN:
-        this.camera.adjustColatitude(PI/100);
-        break;
-      case LEFT:
         this.camera.adjustLongitude(-PI/100);
         break;
-      case RIGHT:
+      case DOWN:
         this.camera.adjustLongitude(PI/100);
+        break;
+      case LEFT:
+        this.camera.adjustColatitude(-PI/100);
+        break;
+      case RIGHT:
+        this.camera.adjustColatitude(PI/100);
         break;
     }
   } else {

@@ -2,6 +2,7 @@ WorkSpace workspace;
 Hud hud;
 Camera camera;
 Map3D map;
+Land land;
 
 
 void setup() {
@@ -23,6 +24,8 @@ void setup() {
   
   this.map = new Map3D("paris_saclay.data");
   
+  this.land = new Land(this.map);
+  
   
 
   
@@ -34,6 +37,7 @@ void draw(){
   this.workspace.update();
   this.camera.update();
   this.hud.update(this.camera);
+  this.land.update();
 }
 
 void keyPressed() {
@@ -58,6 +62,7 @@ void keyPressed() {
       case 'W':
         // Hide/Show grid & Gizmo
         this.workspace.toggle();
+        this.land.toggle();
         break;
       case '+':
       case 'p':

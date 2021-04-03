@@ -7,7 +7,7 @@ class Camera
   
    public  Camera()
    {
-     this.radius = 1000.0;
+     this.radius = 2000.0;
      this.latitude = PI/2;
      this.colatitude = PI/2 - this.latitude ; // phi
      this.longitude = 3*PI/4; //theta

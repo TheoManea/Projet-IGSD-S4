@@ -4,6 +4,7 @@ class Camera
    float radius; //Le rayon de la sphère virtuelle
    float longitude, colatitude, latitude; // angles définissant la postion des la caméra en coordonnées sphériques
    float x,y,z; // coordonnées cartésiennes déterminées à partir des angles et du radius  
+   boolean lighting;
   
    public  Camera()
    {
@@ -14,7 +15,7 @@ class Camera
      this.x = this.radius * sin(this.longitude) * cos(this.colatitude);
      this.y = this.radius * sin(this.longitude) * sin(this.colatitude);
      this.z = this.radius * cos(this.longitude);
-     
+     this.lighting = false;
      
    }
    
@@ -24,7 +25,11 @@ class Camera
       0, 0, 0,
       0, 0, -1
       );
-    
+    ambientLight(0x7F, 0x7F, 0x7F);
+    if (lighting)
+     directionalLight(0xA0, 0xA0, 0x60, 0, 0, -1);
+    lightFalloff(0.0f, 0.0f, 1.0f);
+    lightSpecular(0.0f, 0.0f, 0.0f);
   }
    
    public void adjustRadius(float offset)
@@ -49,6 +54,11 @@ class Camera
      this.x = this.radius * sin(this.longitude) * cos(this.colatitude);
      this.y = this.radius * sin(this.longitude) * sin(this.colatitude);
      this.z = this.radius * cos(this.longitude);
+   }
+  
+   public void toggle()
+   {
+     this.lighting = (!this.lighting);
    }
   
   void keyPressed() 

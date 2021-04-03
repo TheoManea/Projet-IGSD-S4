@@ -76,6 +76,7 @@ void keyPressed() {
         break;
       case 'l':
       case 'L':
+        this.camera.toggle();
         
       }
     }

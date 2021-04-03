@@ -3,9 +3,26 @@ class WorkSpace
   PShape gizmo;
   PShape grid;
   PShape thinX, thinY;
+  PShape SE,NE,SW,NW;
   
   public WorkSpace(int size)
   {
+    
+   this.SE = createShape(BOX,40);
+   this.SE.setFill(color(0,0,255));
+   this.SE.endShape();
+   
+   this.SW = createShape(BOX,40);
+   this.SW.setFill(color(0,0,255));
+   this.SW.endShape();
+   
+   this.NE = createShape(BOX,40);
+   this.NE.setFill(color(0,0,255));
+   this.NE.endShape();
+   
+   this.NW = createShape(BOX,40);
+   this.NW.setFill(color(0,0,255));
+   this.NW.endShape();
     
     
 
@@ -79,6 +96,10 @@ class WorkSpace
     shape(this.grid);
     shape(this.thinX);
     shape(this.thinY);
+    shape(this.SE,2500,1500);
+    shape(this.SW,-2500,1500);
+    shape(this.NW,-2500,-1500);
+    shape(this.NE,2500,-1500);
   }
 
   /**
@@ -90,5 +111,10 @@ class WorkSpace
      this.grid.setVisible(!this.grid.isVisible());
      this.thinX.setVisible(!this.thinX.isVisible());
      this.thinY.setVisible(!this.thinY.isVisible());
+     this.SE.setVisible(!this.SE.isVisible());
+     this.SW.setVisible(!this.SW.isVisible());
+     this.NE.setVisible(!this.NE.isVisible());
+     this.NW.setVisible(!this.NW.isVisible());
+     
   }
 }

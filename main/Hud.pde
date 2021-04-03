@@ -36,7 +36,7 @@ class Hud {
     noStroke();
     fill(96);
     rectMode(CORNER);
-    rect(20, 0, 200, 130, 5, 5, 5, 5);
+    rect(20, 0, 200, 230, 5, 5, 5, 5);
     // Value
     fill(0xF0);
     textMode(SHAPE);
@@ -46,6 +46,9 @@ class Hud {
     text(" Longitude   "+ String.valueOf((int)(camera.longitude*180/PI) + " °"),80, 50);
     text(" Colatitude   "+ String.valueOf((int)(camera.colatitude*180/PI) + " °"),80, 80);
     text(" Radius   "+ String.valueOf((int)camera.radius) + " m",80, 110);
+    text("X " + String.valueOf((int)camera.x),80,140);
+    text("Y " + String.valueOf((int)camera.y),80,170);
+    text("Z " + String.valueOf((int)camera.z),80,200);
   }
 
   public void update(Camera camera) {

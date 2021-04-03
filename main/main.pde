@@ -1,6 +1,7 @@
 WorkSpace workspace;
 Hud hud;
 Camera camera;
+Map3D map;
 
 
 void setup() {
@@ -20,12 +21,11 @@ void setup() {
   
   this.camera = new Camera();
   
+  this.map = new Map3D("paris_saclay.data");
+  
+  
 
-  camera(
-     0, 2500, 1000, 
-     0, 0, 0, 
-     0, 0, -1
-     );
+  
 
 }
 

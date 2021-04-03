@@ -10,7 +10,7 @@ class Camera
      this.radius = 2000.0;
      this.latitude = PI/2;
      this.colatitude = PI/2 - this.latitude ; // phi
-     this.longitude = 3*PI/4; //theta
+     this.longitude = PI/3; //theta
      this.x = this.radius * sin(this.longitude) * cos(this.colatitude);
      this.y = this.radius * sin(this.longitude) * sin(this.colatitude);
      this.z = this.radius * cos(this.longitude);

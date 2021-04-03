@@ -24,7 +24,7 @@ void setup() {
   
   this.map = new Map3D("paris_saclay.data");
   
-  this.land = new Land(this.map);
+  this.land = new Land(this.map,"paris_saclay.jpg");
   
   
 

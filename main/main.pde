@@ -91,3 +91,9 @@ void keyPressed() {
     }
 
 }
+
+
+void mousePressed() {
+  if (mouseButton == LEFT)
+    this.gpx.click(mouseX, mouseY);
+}

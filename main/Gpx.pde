@@ -3,6 +3,7 @@ class Gpx
   
    PShape track, posts, thumbtacks;
    Map3D map;
+   int selectionPoint;
   
    public Gpx(Map3D myMap)
    {
@@ -22,7 +23,7 @@ class Gpx
              this.track.stroke(144,238,144);
              this.posts.strokeWeight(1.5);
              this.posts.stroke(150,150,150);
-             this.thumbtacks.stroke(255,0,0);
+             this.thumbtacks.stroke(0xFFFF3F3F);
              this.thumbtacks.strokeWeight(8);
             
              int heightPost = 100;
@@ -149,6 +150,44 @@ class Gpx
        
      }
      
+     
+     void click(int mouseX, int mouseY)
+     {
+       
+       float distanceMinimale = dist(0,0,(int)this.map.width,(int)this.map.height);
+     
+       for (int v=0; v < this.thumbtacks.getVertexCount(); v++)
+       {
+          PVector point = this.thumbtacks.getVertex(v);
+          
+          float distancePointSouris = dist(screenX(point.x,point.y,point.z), screenY(point.x,point.y,point.z), mouseX, mouseY );
+          
+          if(distancePointSouris < distanceMinimale)
+          {
+             distanceMinimale = distancePointSouris;
+             this.selectionPoint = v;
+            
+          }
+          
+          
+       }
+       
+       for(int foo = 0; foo <  this.thumbtacks.getVertexCount(); foo++)
+       {
+           if(foo == this.selectionPoint)
+           {
+              this.thumbtacks.setStroke(foo,0xFF3FFF7F); 
+           }
+           else
+           {
+              this.thumbtacks.setStroke(foo,0xFFFF3F3F); 
+           }
+           
+       }
+       
+       
+     
+     }
      
      
   

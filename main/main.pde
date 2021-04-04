@@ -3,6 +3,7 @@ Hud hud;
 Camera camera;
 Map3D map;
 Land land;
+Gpx gpx;
 
 
 void setup() {
@@ -26,6 +27,8 @@ void setup() {
   
   this.land = new Land(this.map,"paris_saclay.jpg");
   
+  this.gpx = new Gpx(this.map);
+  
   
 
   
@@ -38,6 +41,7 @@ void draw(){
   this.camera.update();
   this.hud.update(this.camera);
   this.land.update();
+  this.gpx.update();
 }
 
 void keyPressed() {
@@ -77,6 +81,10 @@ void keyPressed() {
       case 'l':
       case 'L':
         this.camera.toggle();
+      case 'X':
+      case 'x':
+        this.gpx.toggle();
+        break;
         
       }
     }

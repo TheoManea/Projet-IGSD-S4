@@ -81,6 +81,7 @@ void keyPressed() {
       case 'l':
       case 'L':
         this.camera.toggle();
+        break;
       case 'X':
       case 'x':
         this.gpx.toggle();

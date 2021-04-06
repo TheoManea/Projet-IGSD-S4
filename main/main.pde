@@ -4,6 +4,7 @@ Camera camera;
 Map3D map;
 Land land;
 Gpx gpx;
+Railways railways;
 
 
 void setup() {
@@ -29,6 +30,8 @@ void setup() {
   
   this.gpx = new Gpx(this.map);
   
+  this.railways = new Railways(this.map, "railways.geojson");
+  
   
 
   
@@ -42,6 +45,7 @@ void draw(){
   this.hud.update(this.camera);
   this.land.update();
   this.gpx.update();
+  this.railways.update();
 }
 
 void keyPressed() {
@@ -81,6 +85,9 @@ void keyPressed() {
       case 'l':
       case 'L':
         this.camera.toggle();
+        break;
+      case 'r':
+        this.railways.toggle();
         break;
       case 'X':
       case 'x':

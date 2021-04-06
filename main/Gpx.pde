@@ -178,7 +178,6 @@ class Gpx
            if(foo == this.selectionPoint)
            {
               this.thumbtacks.setStroke(foo,0xFF3FFF7F);
-              description(camera, foo);
            }
            else
            {
@@ -191,24 +190,41 @@ class Gpx
      
      }
      
+     void testJSON()
+     {
+       String description = "test";
+       description = this.features.getJSONObject(0).getJSONObject("properties").getString("desc",description);
+       println(description);
+     }
+     
      void description(Camera camera, int vector)
      {
-        String description = "";
-        description = this.features.getJSONObject(vector).getJSONObject("properties").getString("desc",description);
-        pushMatrix();
-        lights();
-        fill(0xFFFFFFFF);
-        PVector hit = this.thumbtacks.getVertex(vector);
-        translate(hit.x, hit.y, hit.z + 10.0f);
-        rotateZ(-camera.longitude-HALF_PI);
-        rotateX(-camera.colatitude);
-        g.hint(PConstants.DISABLE_DEPTH_TEST);
-        textMode(SHAPE);
-        textSize(48);
-        textAlign(LEFT, CENTER);
-        text(description, 0, 0);
-        g.hint(PConstants.ENABLE_DEPTH_TEST);
-        popMatrix();
+       
+           String description = "un test !";
+           PVector hit = this.thumbtacks.getVertex(vector);
+           
+           
+           //Test pour afficher le JSON
+           
+           for(int i = 0; i < this.features.size() ; i++ )
+           {
+               println(this.features.get(i));
+           }
+           
+       
+          pushMatrix();
+          lights();
+          fill(0xFFFFFFFF);
+          translate(hit.x, hit.y, hit.z + 10.0f);
+          rotateZ(-camera.longitude-HALF_PI);
+          rotateX(-camera.colatitude);
+          g.hint(PConstants.DISABLE_DEPTH_TEST);
+          textMode(SHAPE);
+          textSize(48);
+          textAlign(LEFT, CENTER);
+          text(description, 0, 0);
+          g.hint(PConstants.ENABLE_DEPTH_TEST);
+          popMatrix();
        
      } 
        

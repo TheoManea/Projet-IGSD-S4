@@ -10,7 +10,7 @@ Projet d'informatique graphique pour la science des donneés de la L2 Informatiq
 ![ListForks](https://forthebadge.com/images/badges/uses-git.svg)
 ![ListForks](https://forthebadge.com/images/badges/winter-is-coming.svg)
 
-# Fonctionnalités 
+# Fonctionnalitées 
 
   - Partie 01 : WorkSpace presque terminé, la caméra marche bien . :white_check_mark:
   

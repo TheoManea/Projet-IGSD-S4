@@ -5,6 +5,7 @@ Map3D map;
 Land land;
 Gpx gpx;
 Railways railways;
+Roads roads;
 
 
 void setup() {
@@ -32,6 +33,8 @@ void setup() {
   
   this.railways = new Railways(this.map, "railways.geojson");
   
+  this.roads = new Roads(this.map,"roads.geojson");
+  
   
 
   
@@ -46,6 +49,7 @@ void draw(){
   this.land.update();
   this.gpx.update();
   this.railways.update();
+  this.roads.update();
 }
 
 void keyPressed() {
@@ -88,6 +92,7 @@ void keyPressed() {
         break;
       case 'r':
         this.railways.toggle();
+        this.roads.toggle();
         break;
       case 'X':
       case 'x':

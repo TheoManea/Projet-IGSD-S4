@@ -6,6 +6,7 @@ Land land;
 Gpx gpx;
 Railways railways;
 Roads roads;
+Buildings buildings;
 
 
 void setup() {
@@ -35,7 +36,13 @@ void setup() {
   
   this.roads = new Roads(this.map,"roads.geojson");
   
-  
+  this.buildings = new Buildings(this.map);
+  this.buildings.add("buildings_city.geojson", 0xFFaaaaaa);
+  this.buildings.add("buildings_IPP.geojson", 0xFFCB9837);
+  this.buildings.add("buildings_EDF_Danone.geojson", 0xFF3030FF);
+  this.buildings.add("buildings_CEA_algorithmes.geojson", 0xFF30FF30);
+  this.buildings.add("buildings_Thales.geojson", 0xFFFF3030);
+  this.buildings.add("buildings_Paris_Saclay.geojson", 0xFFee00dd);
 
   
 
@@ -49,8 +56,10 @@ void draw(){
   this.gpx.update();
   this.railways.update();
   this.roads.update();
+  this.buildings.update();
   //On draw le hud à la fin pour qu'il soit affiché au dessus de la map
   this.hud.update(this.camera);
+  
 }
 
 void keyPressed() {
@@ -98,6 +107,10 @@ void keyPressed() {
       case 'X':
       case 'x':
         this.gpx.toggle();
+        break;
+      case 'b':
+      case 'B':
+        this.buildings.toggle();
         break;
         
       }

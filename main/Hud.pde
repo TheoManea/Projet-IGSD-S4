@@ -36,7 +36,7 @@ class Hud {
     noStroke();
     fill(96);
     rectMode(CORNER);
-    rect(20, 0, 200, 230, 5, 5, 5, 5);
+    rect(0, 0, 200, 230, 5, 5, 5, 5);
     // Value
     fill(0xF0);
     textMode(SHAPE);

@@ -89,12 +89,12 @@ void keyPressed() {
       case '+':
       case 'p':
       case 'P':
-        this.camera.adjustRadius(-10);
+        this.camera.adjustRadius(-60);
         break;
       case '-':
       case 'm':
       case 'M':
-        this.camera.adjustRadius(10);
+        this.camera.adjustRadius(60);
         break;
       case 'l':
       case 'L':

@@ -13,8 +13,12 @@ Projet d'informatique graphique pour la science des donneés de la L2 Informatiq
 # Fonctionnalitées 
 
   - Partie 01 : WorkSpace presque terminé, la caméra marche bien . :white_check_mark:
+  - Partie 02 : :white_check_mark:
+  - Partie 03 : :white_check_mark:
+  - Partie 04 : :white_check_mark:
+  - Partie 05 : :white_check_mark:
   
 
 # Contributeurs 
   - Théo Manea
-  - Fréderic ALmeida De Oliveira
+  - Fréderic Almeida De Oliveira

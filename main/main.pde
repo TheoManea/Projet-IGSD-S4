@@ -45,11 +45,12 @@ void draw(){
   background(0x40);
   this.workspace.update();
   this.camera.update();
-  this.hud.update(this.camera);
   this.land.update();
   this.gpx.update();
   this.railways.update();
   this.roads.update();
+  //On draw le hud à la fin pour qu'il soit affiché au dessus de la map
+  this.hud.update(this.camera);
 }
 
 void keyPressed() {

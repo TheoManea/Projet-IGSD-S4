@@ -29,7 +29,7 @@ void setup() {
   
   this.map = new Map3D("paris_saclay.data");
   
-  this.poi = new Poi(this.land);
+  this.poi = new Poi();
   this.poi.getPoints("bench.geojson");
   
   this.land = new Land(this.map,"paris_saclay.jpg");

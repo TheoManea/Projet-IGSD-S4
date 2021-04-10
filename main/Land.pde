@@ -2,6 +2,7 @@ class Land
 {
   Map3D map;
   PShape shadow, wireFrame, satellite;
+  PShader myShader; 
   
   
    /**
@@ -12,7 +13,7 @@ class Land
    */
    public Land(Map3D map, String nomFichier) 
    {
-      
+        myShader = loadShader("fragmentShader.glsl","vertexShader.glsl");
      
          File ressource = dataFile(nomFichier);
         if (!ressource.exists() || ressource.isDirectory()) {
@@ -28,7 +29,7 @@ class Land
          
          float w = (float)Map3D.width;
          float h = (float)Map3D.height;
-         
+        
          // Shadow shape
          this.shadow = createShape();
          this.shadow.beginShape(QUADS);
@@ -54,6 +55,9 @@ class Land
               Map3D.ObjectPoint tl = this.map.new ObjectPoint((i+1)*tileSize, j*tileSize);
               Map3D.ObjectPoint tr = this.map.new ObjectPoint((i+1)*tileSize, (j+1)*tileSize);
               Map3D.ObjectPoint br = this.map.new ObjectPoint(i*tileSize, (j+1)*tileSize);
+              
+              
+              
               PVector nbl = bl.toNormal();
               PVector ntl = tl.toNormal();
               PVector ntr = tr.toNormal();
@@ -94,6 +98,7 @@ class Land
               Map3D.ObjectPoint deux  = this.map.new ObjectPoint( (i+1)*tileSize, j*tileSize  );
               Map3D.ObjectPoint trois  = this.map.new ObjectPoint( (i+1)*tileSize, (j+1)*tileSize  );
               Map3D.ObjectPoint quatre  = this.map.new ObjectPoint( i*tileSize, (j+1)*tileSize  );
+              
               
               
               this.wireFrame.vertex(un.x, un.y, un.z);

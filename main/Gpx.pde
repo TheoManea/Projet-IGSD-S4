@@ -202,61 +202,74 @@ class Gpx
      {
        String fileName = "trail.geojson";
        String toReturn = "";
-// Check ressources
-File ressource = dataFile(fileName);
-if (!ressource.exists() || ressource.isDirectory()) {
- println("ERROR: GeoJSON file " + fileName + " not found.");
- return "";
-}
-// Load geojson and check features collection
-JSONObject geojson = loadJSONObject(fileName);
-if (!geojson.hasKey("type")) {
- println("WARNING: Invalid GeoJSON file.");
- return "";
-} else if (!"FeatureCollection".equals(geojson.getString("type", "undefined"))) {
- println("WARNING: GeoJSON file doesn't contain features collection.");
- return "";
-}
-// Parse features
-JSONArray features = geojson.getJSONArray("features");
-if (features == null) {
- println("WARNING: GeoJSON file doesn't contain any feature.");
- return "" ;
-}
-for (int f=0; f<features.size(); f++) {
- JSONObject feature = features.getJSONObject(f);
- if (!feature.hasKey("geometry"))
- break;
- JSONObject geometry = feature.getJSONObject("geometry");
- switch (geometry.getString("type", "undefined")) {
-case "LineString":
- // GPX Track
- JSONArray coordinates = geometry.getJSONArray("coordinates");
- if (coordinates != null)
- for (int p=0; p < coordinates.size(); p++) {
- JSONArray point = coordinates.getJSONArray(p);
- println("Track ", p, point.getDouble(0), point.getDouble(1));
- }
- break;
- case "Point":
- // GPX WayPoint
- if (geometry.hasKey("coordinates")) {
-   JSONArray point = geometry.getJSONArray("coordinates");
- String description = "Pas d'information.";
- if (feature.hasKey("properties")) {
-   if(f == index)
-   {
-     toReturn = feature.getJSONObject("properties").getString("desc", description);
-   }
+   
+    // Check ressources
+    File ressource = dataFile(fileName);
+    if (!ressource.exists() || ressource.isDirectory()) 
+    {
+       println("ERROR: GeoJSON file " + fileName + " not found.");
+     return "";
+    }
+   
+    // Load geojson and check features collection
+    JSONObject geojson = loadJSONObject(fileName);
+    if (!geojson.hasKey("type")) 
+    {
+       println("WARNING: Invalid GeoJSON file.");
+       return "";
+    } else if (!"FeatureCollection".equals(geojson.getString("type", "undefined"))) {
+       println("WARNING: GeoJSON file doesn't contain features collection.");
+       return "";
+    }
+   
+    // Parse features
+    JSONArray features = geojson.getJSONArray("features");
+    if (features == null)
+    {
+       println("WARNING: GeoJSON file doesn't contain any feature.");
+       return "" ;
+    }
+    for (int f=0; f<features.size(); f++)
+    {
+    JSONObject feature = features.getJSONObject(f);
+    if (!feature.hasKey("geometry"))
+      break;
+    JSONObject geometry = feature.getJSONObject("geometry");
+    switch (geometry.getString("type", "undefined")) 
+    {
+      case "LineString":
+  
+   // GPX Track
+   JSONArray coordinates = geometry.getJSONArray("coordinates");
+   if (coordinates != null)
+     for (int p=0; p < coordinates.size(); p++) 
+     {
+       JSONArray point = coordinates.getJSONArray(p);
+         println("Track ", p, point.getDouble(0), point.getDouble(1));
+     }
+     break;
+     case "Point":
+     // GPX WayPoint
+     if (geometry.hasKey("coordinates")) 
+     {
+       JSONArray point = geometry.getJSONArray("coordinates");
+       String description = "Pas d'information.";
+       if (feature.hasKey("properties")) 
+       {
+         if(f == index)
+         {
+         toReturn = feature.getJSONObject("properties").getString("desc", description);
+         }
  
- }
- //println("WayPoint", point.getDouble(0), point.getDouble(1), description);
- }
- break;
-default:
- println("WARNING: GeoJSON '" + geometry.getString("type", "undefined") + "' geometry type not handled.");
- break;
- }
+       }
+   
+   //println("WayPoint", point.getDouble(0), point.getDouble(1), description);
+    }
+    break;
+    default:
+    //println("WARNING: GeoJSON '" + geometry.getString("type", "undefined") + "' geometry type not handled.");
+    break;
+  }
 }
   return toReturn;
      }
@@ -278,10 +291,10 @@ default:
           fill(0xFFFFFFFF);
           translate(hit.x, hit.y, hit.z + 10.0f);
           rotateZ(-camera.longitude-HALF_PI);
-          rotateX(-camera.colatitude-HALF_PI);
+          rotateX(-camera.colatitude);
           g.hint(PConstants.DISABLE_DEPTH_TEST);
           textMode(SHAPE);
-          textSize(150);
+          textSize(48);
           textAlign(LEFT, CENTER);
           text(description, 0, 0);
           g.hint(PConstants.ENABLE_DEPTH_TEST);

@@ -1,3 +1,6 @@
+BufferedReader reader;
+String line;
+
 class Gpx
 {
   
@@ -9,6 +12,8 @@ class Gpx
    public Gpx(Map3D myMap)
    {
              this.map = myMap;
+             this.selectionPoint = -1;
+             
              
              //On initialise les trois PShape
              this.track = createShape();
@@ -139,6 +144,8 @@ class Gpx
         shape(this.track);
         shape(this.thumbtacks);
         shape(this.posts);
+        if(this.selectionPoint != -1)
+          description(this.selectionPoint, camera);
         
      }
      
@@ -178,6 +185,7 @@ class Gpx
            if(foo == this.selectionPoint)
            {
               this.thumbtacks.setStroke(foo,0xFF3FFF7F);
+              
            }
            else
            {
@@ -190,37 +198,90 @@ class Gpx
      
      }
      
-     void testJSON()
+     String testJSON(int index)
      {
-       String description = "test";
-       description = this.features.getJSONObject(0).getJSONObject("properties").getString("desc",description);
-       println(description);
+       String fileName = "trail.geojson";
+       String toReturn = "";
+// Check ressources
+File ressource = dataFile(fileName);
+if (!ressource.exists() || ressource.isDirectory()) {
+ println("ERROR: GeoJSON file " + fileName + " not found.");
+ return "";
+}
+// Load geojson and check features collection
+JSONObject geojson = loadJSONObject(fileName);
+if (!geojson.hasKey("type")) {
+ println("WARNING: Invalid GeoJSON file.");
+ return "";
+} else if (!"FeatureCollection".equals(geojson.getString("type", "undefined"))) {
+ println("WARNING: GeoJSON file doesn't contain features collection.");
+ return "";
+}
+// Parse features
+JSONArray features = geojson.getJSONArray("features");
+if (features == null) {
+ println("WARNING: GeoJSON file doesn't contain any feature.");
+ return "" ;
+}
+for (int f=0; f<features.size(); f++) {
+ JSONObject feature = features.getJSONObject(f);
+ if (!feature.hasKey("geometry"))
+ break;
+ JSONObject geometry = feature.getJSONObject("geometry");
+ switch (geometry.getString("type", "undefined")) {
+case "LineString":
+ // GPX Track
+ JSONArray coordinates = geometry.getJSONArray("coordinates");
+ if (coordinates != null)
+ for (int p=0; p < coordinates.size(); p++) {
+ JSONArray point = coordinates.getJSONArray(p);
+ println("Track ", p, point.getDouble(0), point.getDouble(1));
+ }
+ break;
+ case "Point":
+ // GPX WayPoint
+ if (geometry.hasKey("coordinates")) {
+   JSONArray point = geometry.getJSONArray("coordinates");
+ String description = "Pas d'information.";
+ if (feature.hasKey("properties")) {
+   if(f == index)
+   {
+     toReturn = feature.getJSONObject("properties").getString("desc", description);
+   }
+ 
+ }
+ //println("WayPoint", point.getDouble(0), point.getDouble(1), description);
+ }
+ break;
+default:
+ println("WARNING: GeoJSON '" + geometry.getString("type", "undefined") + "' geometry type not handled.");
+ break;
+ }
+}
+  return toReturn;
      }
      
-     void description(Camera camera, int vector)
+     
+     
+     
+     void description(int v, Camera camera)
      {
        
            String description = "un test !";
-           PVector hit = this.thumbtacks.getVertex(vector);
+           PVector hit = this.thumbtacks.getVertex(v);
            
-           
-           //Test pour afficher le JSON
-           
-           for(int i = 0; i < this.features.size() ; i++ )
-           {
-               println(this.features.get(i));
-           }
-           
-       
+           description =  testJSON(v+1);
+            
+          
           pushMatrix();
           lights();
           fill(0xFFFFFFFF);
           translate(hit.x, hit.y, hit.z + 10.0f);
           rotateZ(-camera.longitude-HALF_PI);
-          rotateX(-camera.colatitude);
+          rotateX(-camera.colatitude-HALF_PI);
           g.hint(PConstants.DISABLE_DEPTH_TEST);
           textMode(SHAPE);
-          textSize(48);
+          textSize(150);
           textAlign(LEFT, CENTER);
           text(description, 0, 0);
           g.hint(PConstants.ENABLE_DEPTH_TEST);

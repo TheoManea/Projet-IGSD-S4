@@ -1,9 +1,9 @@
 class Poi
 {
   
-  Land land;
   
-  public Poi(Land givenLand)
+  
+  public Poi()
   {
     
   }

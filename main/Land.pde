@@ -12,6 +12,7 @@ class Land
    */
    public Land(Map3D map, String nomFichier) 
    {
+      
      
          File ressource = dataFile(nomFichier);
         if (!ressource.exists() || ressource.isDirectory()) {
@@ -116,6 +117,12 @@ class Land
          this.satellite.setVisible(true);
    }
    
+   
+   public void attrib(String name)
+   {
+   
+   
+   }
    
    
     public void update()

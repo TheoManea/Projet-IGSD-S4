@@ -7,6 +7,7 @@ Gpx gpx;
 Railways railways;
 Roads roads;
 Buildings buildings;
+Poi poi;
 
 
 void setup() {
@@ -28,6 +29,9 @@ void setup() {
   
   this.map = new Map3D("paris_saclay.data");
   
+  this.poi = new Poi(this.land);
+  this.poi.getPoints("bench.geojson");
+  
   this.land = new Land(this.map,"paris_saclay.jpg");
   
   this.gpx = new Gpx(this.map);
@@ -43,6 +47,8 @@ void setup() {
   this.buildings.add("buildings_CEA_algorithmes.geojson", 0xFF30FF30);
   this.buildings.add("buildings_Thales.geojson", 0xFFFF3030);
   this.buildings.add("buildings_Paris_Saclay.geojson", 0xFFee00dd);
+  
+  
 
   
 

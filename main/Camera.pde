@@ -47,7 +47,7 @@ class Camera
    
    public void adjustLongitude(float delta)
    {
-     if(this.radius+delta > -3*PI/2 && this.longitude+delta < PI/2)
+     if(this.longitude+delta > 0 && this.longitude+delta < PI/2)
      {
        this.longitude = (this.longitude + delta) ; 
        this.x = this.radius * sin(this.longitude) * cos(this.colatitude);

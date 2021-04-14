@@ -290,11 +290,11 @@ class Gpx
           lights();
           fill(0xFFFFFFFF);
           translate(hit.x, hit.y, hit.z + 10.0f);
-          rotateZ(-camera.longitude-HALF_PI);
-          rotateX(-camera.colatitude);
+          rotateZ(camera.longitude-HALF_PI);
+          rotateX(camera.colatitude);
           g.hint(PConstants.DISABLE_DEPTH_TEST);
           textMode(SHAPE);
-          textSize(48);
+          textSize(70);
           textAlign(LEFT, CENTER);
           text(description, 0, 0);
           g.hint(PConstants.ENABLE_DEPTH_TEST);

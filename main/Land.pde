@@ -2,7 +2,8 @@ class Land
 {
   Map3D map;
   PShape shadow, wireFrame, satellite;
-  PShader myShader; 
+  
+  private Poi poi;
   
   
    /**
@@ -11,9 +12,9 @@ class Land
    * @param map Land associated elevation Map3D object 
    * @return Land object
    */
-   public Land(Map3D map, String nomFichier) 
+   public Land(Map3D map, String nomFichier, PImage heatmap) 
    {
-        myShader = loadShader("fragmentShader.glsl","vertexShader.glsl");
+        
      
          File ressource = dataFile(nomFichier);
         if (!ressource.exists() || ressource.isDirectory()) {
@@ -22,6 +23,10 @@ class Land
         }
         PImage uvmap = loadImage(nomFichier);
          
+       
+        
+        this.poi = new Poi(this.map);
+       
      
      
          final float tileSize = 25.0f;
@@ -42,6 +47,7 @@ class Land
          this.shadow.endShape();
          
          this.satellite = createShape();
+         
          this.satellite.beginShape(QUADS);
           this.satellite.texture(uvmap);
           this.satellite.noFill();
@@ -79,6 +85,7 @@ class Land
          
          
          // Wireframe shape
+        
          this.wireFrame = createShape();
          this.wireFrame.beginShape(QUADS);
          this.wireFrame.noFill();

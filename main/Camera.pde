@@ -34,26 +34,40 @@ class Camera
    
    public void adjustRadius(float offset)
    {
-     this.radius = this.radius + offset;
-     this.x = this.radius * sin(this.longitude) * cos(this.colatitude);
-     this.y = this.radius * sin(this.longitude) * sin(this.colatitude);
-     this.z = this.radius * cos(this.longitude);
+     if(this.radius + offset < width * 3.0 && this.radius + offset > width*0.5)
+     {
+           this.radius = this.radius + offset;
+           this.x = this.radius * sin(this.longitude) * cos(this.colatitude);
+           this.y = this.radius * sin(this.longitude) * sin(this.colatitude);
+           this.z = this.radius * cos(this.longitude);
+     }
+     
+     
    }
    
    public void adjustLongitude(float delta)
    {
-     this.longitude = this.longitude + delta; 
-     this.x = this.radius * sin(this.longitude) * cos(this.colatitude);
-     this.y = this.radius * sin(this.longitude) * sin(this.colatitude);
-     this.z = this.radius * cos(this.longitude);
+     if(this.radius+delta > -3*PI/2 && this.longitude+delta < PI/2)
+     {
+       this.longitude = (this.longitude + delta) ; 
+       this.x = this.radius * sin(this.longitude) * cos(this.colatitude);
+       this.y = this.radius * sin(this.longitude) * sin(this.colatitude);
+       this.z = this.radius * cos(this.longitude);
+     }
+     
+     
    }
    
    public void adjustColatitude(float delta)
    {
-     this.colatitude = this.colatitude + delta;
-     this.x = this.radius * sin(this.longitude) * cos(this.colatitude);
-     this.y = this.radius * sin(this.longitude) * sin(this.colatitude);
-     this.z = this.radius * cos(this.longitude);
+     if(this.colatitude + delta > -2*PI && this.colatitude + delta < 2*PI)
+     {
+       this.colatitude = (this.colatitude + delta) ;
+       this.x = this.radius * sin(this.longitude) * cos(this.colatitude);
+       this.y = this.radius * sin(this.longitude) * sin(this.colatitude);
+       this.z = this.radius * cos(this.longitude);
+     }
+     
    }
   
    public void toggle()

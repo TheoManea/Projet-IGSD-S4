@@ -245,7 +245,7 @@ class Gpx
      for (int p=0; p < coordinates.size(); p++) 
      {
        JSONArray point = coordinates.getJSONArray(p);
-         println("Track ", p, point.getDouble(0), point.getDouble(1));
+         //println("Track ", p, point.getDouble(0), point.getDouble(1));
      }
      break;
      case "Point":

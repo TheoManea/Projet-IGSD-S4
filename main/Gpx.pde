@@ -30,7 +30,7 @@ class Gpx
              this.posts.strokeWeight(1.5);
              this.posts.stroke(150,150,150);
              this.thumbtacks.stroke(0xFFFF3F3F);
-             this.thumbtacks.strokeWeight(8);
+             this.thumbtacks.strokeWeight(15);
             
              int heightPost = 100;
      

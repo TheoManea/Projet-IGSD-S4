@@ -25,7 +25,7 @@ class Land
          
        
         
-        this.poi = new Poi(this.map);
+        
        
      
      

@@ -12,7 +12,7 @@ Buildings buildings;
 
 void setup() {
   // Display setup
-  fullScreen(P3D);
+  size(1500,1000,P3D);
   // Setup Head Up Display
   this.hud = new Hud();
   smooth(8);

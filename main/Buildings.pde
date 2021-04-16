@@ -61,7 +61,7 @@ class Buildings
                 roof = createShape();
                 walls = createShape();
                 roof.beginShape();
-                walls.beginShape(QUADS);
+                walls.beginShape(QUAD_STRIP);
                 roof.fill(myColor);
                 walls.fill(myColor);
                 walls.emissive(0x30);
@@ -85,10 +85,12 @@ class Buildings
                       if(op.inside())
                       {
                        
-                        float toit = Map3D.heightScale*12.0f*(float)levels;
+                        float toit = Map3D.heightScale*8.0f*(float)levels;
                         
                         roof.vertex(op.x,op.y,op.z + toit);
                         
+                        walls.vertex(op.x,op.y,op.z);
+                        walls.vertex(op.x,op.y,op.z + toit);
                         
                       }
                       

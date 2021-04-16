@@ -2,7 +2,6 @@ class Land
 {
   Map3D map;
   PShape shadow, wireFrame, satellite;
-  
   private Poi poi;
   
   
@@ -15,6 +14,8 @@ class Land
    public Land(Map3D map, String nomFichier, PImage heatmap) 
    {
         
+       //this.poi = new Poi(this.map);
+       //final ArrayList<PVector> pointOfInterest = poi.getPoints("bench.geojson");
      
          File ressource = dataFile(nomFichier);
         if (!ressource.exists() || ressource.isDirectory()) {

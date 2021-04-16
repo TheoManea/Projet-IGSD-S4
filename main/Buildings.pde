@@ -65,7 +65,9 @@ class Buildings
                 roof.fill(myColor);
                 walls.fill(myColor);
                 walls.emissive(0x30);
+                walls.noStroke();
                 roof.emissive(0x60);
+                roof.noStroke();
                 
                 JSONArray coord = geometry.getJSONArray("coordinates");
                 
@@ -83,10 +85,10 @@ class Buildings
                       if(op.inside())
                       {
                        
-                        float toit = Map3D.heightScale*3.0f*(float)levels;
+                        float toit = Map3D.heightScale*12.0f*(float)levels;
+                        
                         roof.vertex(op.x,op.y,op.z + toit);
-                        walls.vertex(op.x,op.y,op.z);
-                        walls.vertex(op.x,op.y,op.z + toit);
+                        
                         
                       }
                       

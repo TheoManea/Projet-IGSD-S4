@@ -32,7 +32,8 @@ void setup() {
   
   PImage heatmap = loadImage("heatmap.png");
   
-  this.land = new Land(this.map,"paris_saclay.jpg",heatmap);
+  this.land = new Land(this.map,"paris_saclay.jpg");
+  this.land.getMostFamousBench();
   
   this.gpx = new Gpx(this.map);
   

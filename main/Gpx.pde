@@ -11,6 +11,9 @@ class Gpx
     
    public Gpx(Map3D myMap)
    {
+                  
+     
+     
              this.map = myMap;
              this.selectionPoint = -1;
              

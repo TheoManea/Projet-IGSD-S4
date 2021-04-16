@@ -1,8 +1,13 @@
+import java.util.*;
+import java.io.*;
+
 class Land 
 {
   Map3D map;
   PShape shadow, wireFrame, satellite;
   private Poi poi;
+  private LinkedHashMap<PVector,PVector> poiBenchMin = new LinkedHashMap<PVector,PVector>();
+  private LinkedHashMap<PVector,Integer> mostFamousBenchInTheWorld = new LinkedHashMap<PVector,Integer>(); 
   
   
    /**
@@ -11,11 +16,14 @@ class Land
    * @param map Land associated elevation Map3D object 
    * @return Land object
    */
-   public Land(Map3D map, String nomFichier, PImage heatmap) 
+   public Land(Map3D map, String nomFichier) 
    {
-        
-       //this.poi = new Poi(this.map);
-       //final ArrayList<PVector> pointOfInterest = poi.getPoints("bench.geojson");
+         this.map = map;
+       this.poi = new Poi(this.map);
+       final ArrayList<PVector> pointOfInterest = poi.getPoints("bench.geojson");
+       
+       
+       //HashMap<PVector,PVector> poiParkingMin = new HashMap<PVector,PVector>();
      
          File ressource = dataFile(nomFichier);
         if (!ressource.exists() || ressource.isDirectory()) {
@@ -31,7 +39,7 @@ class Land
      
      
          final float tileSize = 25.0f;
-         this.map = map;
+        
          
          float w = (float)Map3D.width;
          float h = (float)Map3D.height;
@@ -69,6 +77,23 @@ class Land
               PVector ntl = tl.toNormal();
               PVector ntr = tr.toNormal();
               PVector nbr = br.toNormal();
+              
+              PVector cB = new PVector(0,0,0);
+              float distMin = 0.0;
+              
+              for(int z = 0; z < pointOfInterest.size(); z++)
+              {
+                  float tmp_dist = dist(nbl.x,nbl.y,nbl.z,pointOfInterest.get(z).x,pointOfInterest.get(z).y,pointOfInterest.get(z).z);
+                  
+                  if(tmp_dist < distMin)
+                  {
+                    distMin = tmp_dist;
+                    cB = pointOfInterest.get(z);
+                  }
+              }
+              
+              this.poiBenchMin.put(nbl,cB);
+              
               this.satellite.normal(nbl.x, nbl.y, nbl.z);
               this.satellite.vertex(bl.x, bl.y, bl.z, u, v);
               this.satellite.normal(ntl.x, ntl.y, ntl.z);
@@ -130,12 +155,49 @@ class Land
          this.satellite.setVisible(true);
    }
    
-   
-   public void attrib(String name)
+   public int getIndex(LinkedHashMap<PVector,Integer> mostFamous, PVector keyToFind)
    {
-   
-   
+     int index = 0;
+     
+     for(Map.Entry<PVector,Integer> el : mostFamous.entrySet())
+     {
+       if(el.getKey() == keyToFind)
+       {
+         break;
+       }
+       else
+       {
+         index++;
+       }
+     }
+     
+     return index;
    }
+   
+   public void getMostFamousBench()
+   {
+     
+     for(Map.Entry<PVector,PVector> el : poiBenchMin.entrySet() )
+     {
+       PVector myKey = el.getKey();
+       PVector value = el.getValue();
+       
+       if(mostFamousBenchInTheWorld.containsKey(value))
+       {
+         mostFamousBenchInTheWorld.put(value,mostFamousBenchInTheWorld.get(getIndex(mostFamousBenchInTheWorld,value)) + 1);
+       }
+       else
+       {
+         mostFamousBenchInTheWorld.put(value,1);
+       }
+       
+       
+       
+     }
+     
+   }
+   
+  
    
    
     public void update()

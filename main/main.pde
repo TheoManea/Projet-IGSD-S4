@@ -7,8 +7,12 @@ Gpx gpx;
 Railways railways;
 Roads roads;
 Buildings buildings;
+Poi poi;
 
+PShader progShader;
 
+boolean picnic; // Booléen sur l'affichage des table de picnic dans le shader
+boolean bicycle; // Booléen sur l'affichage des stations velo dans le shader
 
 void setup() {
   // Display setup
@@ -29,11 +33,18 @@ void setup() {
   
   this.map = new Map3D("paris_saclay.data");
   
+  progShader = loadShader("myFrag.glsl", "myGreen.glsl");
+  
+  this.picnic = true;
+  this.bicycle = true;
+  
   
   PImage heatmap = loadImage("heatmap.png");
   
   this.land = new Land(this.map,"paris_saclay.jpg");
-  this.land.getMostFamousBench();
+  
+  this.poi = new Poi(this.land);
+  this.poi.calculdistance();
   
   this.gpx = new Gpx(this.map);
   
@@ -60,7 +71,12 @@ void draw(){
   //On draw les éléments dans un ordre de priorité défini
   this.workspace.update();
   this.camera.update();
+  // On envoie nos booléens au shader pour pouvoir les afficher ou non
+  progShader.set("picnic", this.picnic);
+  progShader.set("bicycle", this.bicycle);
+  shader(progShader);
   this.land.update();
+  resetShader();
   this.railways.update();
   this.roads.update();
   this.buildings.update();

@@ -4,11 +4,16 @@ String line;
 class Gpx
 {
   
-   PShape track, posts, thumbtacks;
-   Map3D map;
-   int selectionPoint;
+   PShape track, posts, thumbtacks; //Forme de la route et des piquets
+   Map3D map; 
+   int selectionPoint; 
    JSONArray features; 
     
+    
+   /**
+    * Constructeur de la classe gpx
+    * @params map : Le terrain 
+    */ 
    public Gpx(Map3D myMap)
    {
                   
@@ -141,7 +146,9 @@ class Gpx
      }
      
      
-     
+     /**
+      * Procédure pour afficher les PShape
+      */
      void update()
      {
         shape(this.track);
@@ -152,7 +159,9 @@ class Gpx
         
      }
      
-     
+     /**
+      * Procédure pour rendre visible le tracé GPS
+      */
      void toggle()
      {
         this.track.setVisible(!this.track.isVisible());
@@ -161,7 +170,9 @@ class Gpx
        
      }
      
-     
+     /**
+      * Procédure pour la gestion du clic 
+      */
      void click(int mouseX, int mouseY)
      {
        
@@ -206,80 +217,82 @@ class Gpx
        String fileName = "trail.geojson";
        String toReturn = "";
    
-    // Check ressources
-    File ressource = dataFile(fileName);
-    if (!ressource.exists() || ressource.isDirectory()) 
-    {
-       println("ERROR: GeoJSON file " + fileName + " not found.");
-     return "";
-    }
-   
-    // Load geojson and check features collection
-    JSONObject geojson = loadJSONObject(fileName);
-    if (!geojson.hasKey("type")) 
-    {
-       println("WARNING: Invalid GeoJSON file.");
+      // Check ressources
+      File ressource = dataFile(fileName);
+      if (!ressource.exists() || ressource.isDirectory()) 
+      {
+         println("ERROR: GeoJSON file " + fileName + " not found.");
        return "";
-    } else if (!"FeatureCollection".equals(geojson.getString("type", "undefined"))) {
-       println("WARNING: GeoJSON file doesn't contain features collection.");
-       return "";
-    }
-   
-    // Parse features
-    JSONArray features = geojson.getJSONArray("features");
-    if (features == null)
-    {
-       println("WARNING: GeoJSON file doesn't contain any feature.");
-       return "" ;
-    }
-    for (int f=0; f<features.size(); f++)
-    {
-    JSONObject feature = features.getJSONObject(f);
-    if (!feature.hasKey("geometry"))
-      break;
-    JSONObject geometry = feature.getJSONObject("geometry");
-    switch (geometry.getString("type", "undefined")) 
-    {
-      case "LineString":
-  
-   // GPX Track
-   JSONArray coordinates = geometry.getJSONArray("coordinates");
-   if (coordinates != null)
-     for (int p=0; p < coordinates.size(); p++) 
-     {
-       JSONArray point = coordinates.getJSONArray(p);
-         //println("Track ", p, point.getDouble(0), point.getDouble(1));
-     }
-     break;
-     case "Point":
-     // GPX WayPoint
-     if (geometry.hasKey("coordinates")) 
-     {
-       JSONArray point = geometry.getJSONArray("coordinates");
-       String description = "Pas d'information.";
-       if (feature.hasKey("properties")) 
+      }
+     
+      // Load geojson and check features collection
+      JSONObject geojson = loadJSONObject(fileName);
+      if (!geojson.hasKey("type")) 
+      {
+         println("WARNING: Invalid GeoJSON file.");
+         return "";
+      } else if (!"FeatureCollection".equals(geojson.getString("type", "undefined"))) {
+         println("WARNING: GeoJSON file doesn't contain features collection.");
+         return "";
+      }
+     
+      // Parse features
+      JSONArray features = geojson.getJSONArray("features");
+      if (features == null)
+      {
+         println("WARNING: GeoJSON file doesn't contain any feature.");
+         return "" ;
+      }
+      for (int f=0; f<features.size(); f++)
+      {
+      JSONObject feature = features.getJSONObject(f);
+      if (!feature.hasKey("geometry"))
+        break;
+      JSONObject geometry = feature.getJSONObject("geometry");
+      switch (geometry.getString("type", "undefined")) 
+      {
+        case "LineString":
+    
+     // GPX Track
+     JSONArray coordinates = geometry.getJSONArray("coordinates");
+     if (coordinates != null)
+       for (int p=0; p < coordinates.size(); p++) 
        {
-         if(f == index)
-         {
-         toReturn = feature.getJSONObject("properties").getString("desc", description);
-         }
- 
+         JSONArray point = coordinates.getJSONArray(p);
+           //println("Track ", p, point.getDouble(0), point.getDouble(1));
        }
+       break;
+       case "Point":
+       // GPX WayPoint
+       if (geometry.hasKey("coordinates")) 
+       {
+         JSONArray point = geometry.getJSONArray("coordinates");
+         String description = "Pas d'information.";
+         if (feature.hasKey("properties")) 
+         {
+           if(f == index)
+           {
+           toReturn = feature.getJSONObject("properties").getString("desc", description);
+           }
    
-   //println("WayPoint", point.getDouble(0), point.getDouble(1), description);
+         }
+     
+     //println("WayPoint", point.getDouble(0), point.getDouble(1), description);
+      }
+      break;
+      default:
+      //println("WARNING: GeoJSON '" + geometry.getString("type", "undefined") + "' geometry type not handled.");
+      break;
     }
-    break;
-    default:
-    //println("WARNING: GeoJSON '" + geometry.getString("type", "undefined") + "' geometry type not handled.");
-    break;
-  }
-}
-  return toReturn;
+    }
+      return toReturn;
      }
      
      
      
-     
+     /**
+     *  Méthode pour afficher une épingle
+     */
      void description(int v, Camera camera)
      {
        
@@ -298,6 +311,8 @@ class Gpx
           g.hint(PConstants.DISABLE_DEPTH_TEST);
           textMode(SHAPE);
           textSize(70);
+          
+          
           textAlign(LEFT, CENTER);
           text(description, 0, 0);
           g.hint(PConstants.ENABLE_DEPTH_TEST);

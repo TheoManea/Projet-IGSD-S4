@@ -4,8 +4,12 @@ class Camera
    float radius; //Le rayon de la sphère virtuelle
    float longitude, colatitude, latitude; // angles définissant la postion des la caméra en coordonnées sphériques
    float x,y,z; // coordonnées cartésiennes déterminées à partir des angles et du radius  
-   boolean lighting;
+   boolean lighting; //Booleen indiquand si on ajoute la luminosité ou non
   
+  
+  /**
+  * Constructeur de Camera 
+  **/
    public  Camera()
    {
      this.radius = 3000.0;
@@ -19,6 +23,9 @@ class Camera
      
    }
    
+   /**
+   * Méthode pour afficher la caméra
+   **/
    public void update(){
     camera(
       this.x, -this.y, this.z,
@@ -32,6 +39,10 @@ class Camera
     lightSpecular(0.0f, 0.0f, 0.0f);
   }
    
+   /**
+   * Gestion du rayon de la sphère
+   * @param offset : la variation à modifier sur le rayon
+   **/
    public void adjustRadius(float offset)
    {
      if(this.radius + offset < width * 3.0 && this.radius + offset > width*0.5)
@@ -45,6 +56,11 @@ class Camera
      
    }
    
+   
+   /**
+   * Gestion de la longitude
+   * @param delta : la variation à modifier sur la longitude
+   **/
    public void adjustLongitude(float delta)
    {
      if(this.longitude+delta > 0 && this.longitude+delta < PI/2)
@@ -58,6 +74,10 @@ class Camera
      
    }
    
+   /**
+   * Gestion de la colatitude
+   * @param delta : la variation à modifier sur la colitude
+   **/
    public void adjustColatitude(float delta)
    {
      if(this.colatitude + delta > -2*PI && this.colatitude + delta < 2*PI)
@@ -70,10 +90,14 @@ class Camera
      
    }
   
+  /**
+  * Méthode pour rendre la lumière visible
+  */
    public void toggle()
    {
      this.lighting = (!this.lighting);
    }
+  
   
   void keyPressed() 
   {

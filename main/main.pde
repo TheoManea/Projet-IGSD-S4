@@ -15,12 +15,16 @@ boolean picnic; // Booléen sur l'affichage des table de picnic dans le shader
 boolean bicycle; // Booléen sur l'affichage des stations velo dans le shader
 
 void setup() {
+  
   // Display setup
   size(1500,1000,P3D);
+  
   // Setup Head Up Display
   this.hud = new Hud();
+  
   smooth(8);
   frameRate(60);
+  
   // Initial drawing
   background(0x40);
   
@@ -29,29 +33,36 @@ void setup() {
   // Prepare local coordinate system grid & gizmo
   this.workspace = new WorkSpace(250*100);
   
+  //Initialisation de la camera
   this.camera = new Camera();
   
+  //Initialisation de la map
   this.map = new Map3D("paris_saclay.data");
   
+  //Chargement du Shader
   progShader = loadShader("myFrag.glsl", "myGreen.glsl");
   
+  //Booleen pour afficher ou pas les points d'intérêts
   this.picnic = true;
   this.bicycle = true;
   
-  
-  PImage heatmap = loadImage("heatmap.png");
-  
+  //Initialisation du terrain
   this.land = new Land(this.map,"paris_saclay.jpg");
   
+  //Initialisation des points d'intérêts
   this.poi = new Poi(this.land);
   this.poi.calculdistance();
   
+  //Initialisation du tracé GPS
   this.gpx = new Gpx(this.map);
   
+  //Initialisation du chemin de fer
   this.railways = new Railways(this.map, "railways.geojson");
   
+  //Initialisation des routes
   this.roads = new Roads(this.map,"roads.geojson");
   
+  //Création des différents bâtiments
   this.buildings = new Buildings(this.map);
   this.buildings.add("buildings_city.geojson", 0xFFaaaaaa);
   this.buildings.add("buildings_IPP.geojson", 0xFFCB9837);
@@ -67,16 +78,18 @@ void setup() {
 }
 
 void draw(){
+  
   background(0x40);
-  //On draw les éléments dans un ordre de priorité défini
   this.workspace.update();
   this.camera.update();
-  // On envoie nos booléens au shader pour pouvoir les afficher ou non
+  
+  // On crée no shader avec le booleen correspondant
   progShader.set("picnic", this.picnic);
   progShader.set("bicycle", this.bicycle);
   shader(progShader);
   this.land.update();
   resetShader();
+  
   this.railways.update();
   this.roads.update();
   this.buildings.update();
@@ -124,6 +137,7 @@ void keyPressed() {
         this.camera.toggle();
         break;
       case 'r':
+      case 'R':
         this.railways.toggle();
         this.roads.toggle();
         break;

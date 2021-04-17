@@ -5,6 +5,7 @@ class Hud {
      this.hud = g.getMatrix((PMatrix3D) null);
   }
 
+  
   private void begin() {
     g.noLights();
     g.pushMatrix();

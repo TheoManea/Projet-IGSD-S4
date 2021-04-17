@@ -4,7 +4,7 @@ import java.io.*;
 class Land 
 {
   Map3D map;
-  PShape shadow, wireFrame, satellite;
+  PShape shadow, wireFrame, satellite; //Différent PShape
    
   
   

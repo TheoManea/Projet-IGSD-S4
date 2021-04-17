@@ -1,19 +1,29 @@
 class Buildings
 {
-  PShape buildings;
-  Map3D map;
-  JSONArray features;
+  PShape buildings; //Forme pour nos bâtiments
+  Map3D map; //Carte du système
+  JSONArray features; //Array contenant nos données 
   
-  
+  /**
+  * Constructeur de Buildings
+  * @params map : notre cart
+  * @return void
+  */
   public Buildings(Map3D givenMap)
   {
       this.map = givenMap;
       this.buildings = createShape(GROUP);   
   }
   
+  
+  /**
+  * Fonction d'ajout d'un fichier geojson à nos buildings
+  * @params nomFichier : le nom du geojson contenant les différents données
+  * @params couleur : une couleur qui varie en fonction du type du building
+  */
   public void add(String nomFichier, color myColor)
   {
-      //Récuperation du fichier mgl
+      //On vérifie l'existence 
       File ressource = dataFile(nomFichier);
       if(!ressource.exists() || ressource.isDirectory())
       {
@@ -42,13 +52,15 @@ class Buildings
         return;
       }
       
-      
+      //Pour chaque élement dans notre array on va le construire
       for(int f=0; f < features.size(); f++)
       {
+          //On vérifie que notre feature possède bel et bien un attribut "geometry"
           JSONObject feature = features.getJSONObject(f);
           if (!feature.hasKey("geometry"))
             break;
             
+          //On récupère le nombre d'étages dans le bâtiments
           int levels = feature.getInt("building:levels", 1);
           JSONObject geometry = feature.getJSONObject("geometry");
           
@@ -71,6 +83,7 @@ class Buildings
                 
                 JSONArray coord = geometry.getJSONArray("coordinates");
                 
+                //Les buildings possèdent plusieurs élements donc on itère et on traite un par un
                 for(int bar = 0 ; bar < coord.size(); bar++)
                 {
                     JSONArray num_bat = coord.getJSONArray(bar);
@@ -117,11 +130,18 @@ class Buildings
       
   }
   
+  
+  /**
+  * Méthode pour afficher les bâtiments
+  */
   void update()
   {
     shape(this.buildings); 
   }
   
+  /**
+  * Méthode pour rendre visible ou non les bâtiments
+  */
   void toggle()
   {
     this.buildings.setVisible(!this.buildings.isVisible()); 

@@ -37,7 +37,7 @@ class Hud {
   }
   
   /**
-  * Méthode pour afficher la Caméra
+  * Méthode pour afficher la Caméra et les touches actives
   */
   public void displayCamera(Camera camera){
     // Top left area
@@ -57,6 +57,21 @@ class Hud {
     text("X " + String.valueOf((int)camera.x),80,140);
     text("Y " + String.valueOf((int)camera.y),80,170);
     text("Z " + String.valueOf((int)camera.z),80,200);
+    
+    //touches active
+    noStroke();
+    fill(96);
+    rect(1300, 0, 200, 230, 5, 5, 5, 5);
+    fill(0xF0);
+    textMode(SHAPE);
+    textSize(14);
+    text("Grille & Gizmo [W]",1400,30);
+    text("Zoom [+] [p] [P]",1400,60);
+    text("Dézoom [-] [m] [M]",1400,90);
+    text("Luminosité [l] [L]",1400,120);
+    text("Route & chemin de fer [r] [R]",1400,150);
+    text("Tracé GPS [x] [X]",1400,180);
+    text("Bâtiments [b] [B]",1400,210);
   }
 
   /**

@@ -2,8 +2,8 @@ class WorkSpace
 {
   PShape gizmo;
   PShape grid;
-  PShape thinX, thinY;
-  PShape SE,NE,SW,NW;
+  PShape thinX, thinY; //l'axe X et Y
+  PShape SE,NE,SW,NW; //Délimitation du terrain
   
   public WorkSpace(int size)
   {

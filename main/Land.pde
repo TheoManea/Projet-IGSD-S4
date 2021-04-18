@@ -4,7 +4,7 @@ import java.io.*;
 class Land 
 {
   Map3D map;
-  PShape shadow, wireFrame, satellite; //Différent PShape
+  PShape shadow, wireFrame, satellite; //Les différentes PShape
    
   
   
@@ -155,7 +155,9 @@ class Land
    
   
    
-   
+   /**
+    * Méthodes pour afficher les formes
+    */
     public void update()
     {
      shape(this.shadow);

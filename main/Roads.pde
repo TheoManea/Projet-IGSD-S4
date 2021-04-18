@@ -180,11 +180,18 @@ class Roads
       
   }
   
+  
+  /**
+  * Méthodes pour afficher les routes
+  */
   void update()
   {
     shape(this.roads); 
   }
   
+  /**
+  * Méthode pour rendre visible ou non nos routes
+  */
   void toggle()
   {
     this.roads.setVisible(!this.roads.isVisible()); 

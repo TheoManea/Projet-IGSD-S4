@@ -3,7 +3,7 @@ class Poi {
   Land land;
 
   /**
-  * Constructeur de la classe
+  * Constructeur de l'objet POI
   * @params land : Le terrain sur lequel on travaille
   */
   Poi(Land land){
@@ -13,7 +13,7 @@ class Poi {
   /**
   * Fonction qui récupère les points d'un fichier
   * @params fileName : le nom du fichier geojson
-  * @return la liste des PVector associés au fichier
+  * @return la liste des PVectors associés au geojson
   */
   ArrayList<PVector> getPoints(String fileName){
 

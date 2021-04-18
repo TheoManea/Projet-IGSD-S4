@@ -19,6 +19,9 @@ class Hud {
     g.popMatrix();
   }
 
+  /**
+  * Méthode pour afficher les FPS
+  */
   private void displayFPS() {
     // Bottom left area
     noStroke();
@@ -32,6 +35,10 @@ class Hud {
     textAlign(CENTER, CENTER);
     text(String.valueOf((int)frameRate) + " fps", 40, height-20);
   }
+  
+  /**
+  * Méthode pour afficher la Caméra
+  */
   public void displayCamera(Camera camera){
     // Top left area
     noStroke();
@@ -52,6 +59,9 @@ class Hud {
     text("Z " + String.valueOf((int)camera.z),80,200);
   }
 
+  /**
+  * Méthode pour afficher le HUD
+  */
   public void update(Camera camera) {
     this.begin();
     this.displayFPS();

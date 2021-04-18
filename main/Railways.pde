@@ -4,7 +4,11 @@ class Railways
   Map3D map;
   JSONArray features;
   
-  
+   /**
+  * Constructeur du chemin de fer
+  * @params map : La carte sur laquelle on travaille
+  * @params fileName : le nom du fichier geojson représentant la ligne du RER B
+  */
   public Railways(Map3D givenMap, String nomFichier)
   {
       this.map = givenMap;
@@ -106,11 +110,17 @@ class Railways
       
   }
   
+  /**
+  * Méthode pour afficher le chemin de fer
+  */
   void update()
   {
     shape(this.railways); 
   }
   
+  /**
+  * Méthode pour rendre visible ou non la voie ferrée
+  */
   void toggle()
   {
     this.railways.setVisible(!this.railways.isVisible()); 

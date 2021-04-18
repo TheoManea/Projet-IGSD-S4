@@ -18,7 +18,7 @@ void setup() {
   
   // Display setup
   size(1500,1000,P3D);
-  
+  //fullScreen(P3D);
   // Setup Head Up Display
   this.hud = new Hud();
   

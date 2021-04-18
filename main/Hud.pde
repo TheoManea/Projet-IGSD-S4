@@ -44,34 +44,35 @@ class Hud {
     noStroke();
     fill(96);
     rectMode(CORNER);
-    rect(0, 0, 200, 230, 5, 5, 5, 5);
+    rect(0, 0, width/8, height/4, 5, 5, 5, 5);
     // Value
     fill(0xF0);
     textMode(SHAPE);
     textSize(14);
     textAlign(CENTER, CENTER);
-    text("          Camera   ", 40, 20);
-    text(" Longitude   "+ String.valueOf((int)(camera.longitude*180/PI) + " °"),80, 50);
-    text(" Colatitude   "+ String.valueOf((int)(camera.colatitude*180/PI) + " °"),80, 80);
-    text(" Radius   "+ String.valueOf((int)camera.radius) + " m",80, 110);
-    text("X " + String.valueOf((int)camera.x),80,140);
-    text("Y " + String.valueOf((int)camera.y),80,170);
-    text("Z " + String.valueOf((int)camera.z),80,200);
+    text("Camera", width/16, 20);
+    text("Longitude  "+ String.valueOf((int)(camera.longitude*180/PI) + " °"),width/16, 50);
+    text("Colatitude  "+ String.valueOf((int)(camera.colatitude*180/PI) + " °"),width/16, 80);
+    text("Radius  "+ String.valueOf((int)camera.radius) + " m",width/16, 110);
+    text("X " + String.valueOf((int)camera.x),width/16,140);
+    text("Y " + String.valueOf((int)camera.y),width/16,170);
+    text("Z " + String.valueOf((int)camera.z),width/16,200);
     
     //touches active
     noStroke();
     fill(96);
-    rect(1300, 0, 200, 230, 5, 5, 5, 5);
+    rect((width-width/8), 0, width/8, height/4, 5, 5, 5, 5);
     fill(0xF0);
     textMode(SHAPE);
     textSize(14);
-    text("Grille & Gizmo [W]",1400,30);
-    text("Zoom [+] [p] [P]",1400,60);
-    text("Dézoom [-] [m] [M]",1400,90);
-    text("Luminosité [l] [L]",1400,120);
-    text("Route & chemin de fer [r] [R]",1400,150);
-    text("Tracé GPS [x] [X]",1400,180);
-    text("Bâtiments [b] [B]",1400,210);
+    textAlign(CENTER, CENTER);
+    text("Grille & Gizmo [W]",(width-width/16),20);
+    text("Zoom [+ ; P]",(width-width/16),50);
+    text("Dézoom [- ; M]",(width-width/16),80);
+    text("Luminosité [L]",(width-width/16),110);
+    text("Route & chemin de fer [R]",(width-width/16),140);
+    text("Tracé GPS [X]",(width-width/16),170);
+    text("Bâtiments [B]",(width-width/16),200);
   }
 
   /**

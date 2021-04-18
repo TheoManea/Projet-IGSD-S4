@@ -155,6 +155,33 @@ void keyPressed() {
 
 }
 
+//Zoom souris avec mousewheel
+void mouseWheel(MouseEvent event) {
+ float ec = event.getCount();
+ if(ec > 0)
+   this.camera.adjustRadius(-60);
+ else if (ec < 0)
+   this.camera.adjustRadius(60);
+}
+
+//Mouvement souris avec mouse click
+void mouseDragged() {
+ if (mouseButton == CENTER) {
+ // Camera Horizontal
+ float dx = mouseX - pmouseX;
+ if (dx < 0)
+   this.camera.adjustColatitude(PI/100);
+ else if (dx > 0)
+   this.camera.adjustColatitude(-PI/100);
+ // Camera Vertical
+ float dy = mouseY - pmouseY;
+ if (dy < 0)
+   this.camera.adjustLongitude(PI/100);
+ else if (dy > 0)
+   this.camera.adjustLongitude(-PI/100);
+ // INSÉREZ VOTRE CODE ICI
+ }
+}
 
 void mousePressed() {
   if (mouseButton == LEFT)

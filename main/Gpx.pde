@@ -303,11 +303,17 @@ class Gpx
             
           
           pushMatrix();
-          lights();
+          noLights();
           fill(0xFFFFFFFF);
           translate(hit.x, hit.y, hit.z + 10.0f);
-          rotateZ(camera.longitude-HALF_PI);
-          rotateX(camera.colatitude);
+          rotateZ(-HALF_PI-camera.colatitude);
+          rotateX(-camera.longitude);
+          
+          //Utiliser le code suivant en cas de bug d'affichage du texte
+          
+          //rotateX(camera.longitude-HALF_PI);  
+          //rotateZ(camera.colatitude);
+          
           g.hint(PConstants.DISABLE_DEPTH_TEST);
           textMode(SHAPE);
           textSize(70);

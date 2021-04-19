@@ -114,8 +114,8 @@ class Buildings
                   }
                 }
                 
-              default:
-                println("WARNING: GeoJSON '" + geometry.getString("type", "undefined") + "' geometry type not handled.");
+             default:
+               //println("WARNING: GeoJSON '" + geometry.getString("type", "undefined") + "' geometry type not handled.");
                 break;
             
           }
